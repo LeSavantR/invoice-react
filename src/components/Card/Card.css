@@ -1,0 +1,6 @@
+.client-card {
+    padding: 12px;
+    margin-top: 12px;
+    box-shadow: 0.5rem 0.5rem 1rem #ccc, -0.5rem -0.5rem 1rem #fff;
+    width: max-content;
+}

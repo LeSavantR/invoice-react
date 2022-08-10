@@ -1,0 +1,8 @@
+.client-container {
+    display: flex;
+    gap: 22px;
+    margin: 0 auto;
+    justify-content: space-between;
+    max-width: 100%;
+    margin-top: 20px;
+}
