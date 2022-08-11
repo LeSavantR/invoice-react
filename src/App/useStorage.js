@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 function useStorage(key, initialValue){
 
   const [ list, setList ] = useState(initialValue);
+  const [ error, setError ] = useState('')
+  const [ state, setState ] = useState('')
 
   // Imitando la consulta a una API
   useEffect(() => {
@@ -21,7 +23,7 @@ function useStorage(key, initialValue){
 
         setList(parsetList);
       } catch (error) {
-        console.log(error);
+        setError(error);
       }
     }, 3000);
   });
@@ -33,11 +35,11 @@ function useStorage(key, initialValue){
       localStorage.setItem(key, stringifyObject);
       setList(list);
     } catch (error) {
-      console.log(error);
+      setError(error);
     };
   };
 
-  return [ list, saveData ];
+  return { list, saveData, error, setError, state, setState };
 };
 
 export { useStorage };

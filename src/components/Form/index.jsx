@@ -2,98 +2,134 @@ import { useState } from 'react';
 
 function Form({ addClient }) {
 
-  const [ identificacion, setIdentificacion ] = useState('')
-  const [ razon, setRazon ] = useState('')
-  const [ persona, setPersona ] = useState('')
-  const [ direccion, setDireccion ] = useState('')
-  const [ telefono, setTelefono ] = useState('')
-  const [ departamento, setDepartamento ] = useState('')
-  const [ ciudad, setCiudad ] = useState('')
-  const [ cupo, setCupo ] = useState('')
-  const [ activo, setActivo ] = useState('')
+  const [check, setCheck] = useState(true);
 
-  const formAction = (event) => {
+  const [ user, setUser ] = useState({
+    identificacion: '',
+    razon: '',
+    persona: '',
+    direccion: '',
+    telefono: '',
+    departamento: '',
+    ciudad: '',
+    cupo: '',
+    activo: check,
+  })
+
+  const onChangeUser = (event) => {
+    const { name, value } = event.target;
+    setUser({...user, [name]: value})
+  }
+
+  const formEvent = (event) => {
     event.preventDefault();
-    addClient({
-      identificacion,
-      razon,
-      persona,
-      direccion,
-      telefono,
-      departamento,
-      ciudad,
-      cupo,
-      activo,
-    });
-    setIdentificacion('')
-    setRazon('')
-    setPersona('')
-    setDireccion('')
-    setTelefono('')
-    setDepartamento('')
-    setCiudad('')
-    setCupo('')
-    setActivo('')
+    addClient(user);
+    setUser({
+      identificacion: '',
+      razon: '',
+      persona: '',
+      direccion: '',
+      telefono: '',
+      departamento: '',
+      ciudad: '',
+      cupo: '',
+      activo: check,
+    })
   };
 
   return (
-    <form onSubmit={formAction}>
+    <form onSubmit={formEvent}>
       <div>
-        <label>
-          •Identificación
+        <label htmlFor='identificacion'>
+          Identificación:
         </label>
-        <input type="text" value={identificacion} name="identificacion" onChange={(e) => setIdentificacion(e.target.value)} placeholder="Identificación" />
+        <input
+          type="text" value={user.identificacion}
+          name="identificacion" onChange={onChangeUser}
+          placeholder="Identificación"
+        />
       </div>
       <div>
-        <label>
-          •Razón Social
+        <label htmlFor='razon'>
+          Razón Social:
         </label>
-        <input type="text" value={razon} name="razon" onChange={(e) => setRazon(e.target.value)} placeholder="Razón Social" />
+        <input
+          type="text" value={user.razon}
+          name="razon" onChange={onChangeUser}
+          placeholder="Razón Social"
+        />
       </div>
       <div>
-        <label>
-          •Persona de contacto
+        <label htmlFor='persona'>
+          Persona de contacto:
         </label>
-        <input type="text" value={persona} name="persona" onChange={(e) => setPersona(e.target.value)} placeholder="Persona de contacto" />
+        <input
+          type="text" value={user.persona}
+          name="persona" onChange={onChangeUser}
+          placeholder="Persona de contacto"
+        />
       </div>
       <div>
-        <label>
-          •Dirección
+        <label htmlFor='direccion'>
+          Dirección:
         </label>
-        <input type="text" value={direccion} name="direccion" onChange={(e) => setDireccion(e.target.value)} placeholder="Dirección" />
+        <input
+          type="text" value={user.direccion}
+          name="direccion" onChange={onChangeUser}
+          placeholder="Dirección"
+        />
       </div>
       <div>
-        <label>
-          •Teléfono
+        <label htmlFor='telefono'>
+          Teléfono:
         </label>
-        <input type="number" value={telefono} name="telefono" onChange={(e) => setTelefono(e.target.value)} placeholder="Teléfono" />
+        <input
+          type="number" value={user.telefono}
+          name="telefono" onChange={onChangeUser}
+          placeholder="Teléfono"
+        />
       </div>
       <div>
-        <label>
-          •Departamento
+        <label htmlFor='departamento'>
+          Departamento:
         </label>
-        <input type="text" value={departamento} name="departamento" onChange={(e) => setDepartamento(e.target.value)} placeholder="Departamento" />
+        <input
+          type="text" value={user.departamento}
+          name="departamento" onChange={onChangeUser}
+          placeholder="Departamento"
+        />
       </div>
       <div>
-        <label>
-          •Ciudad
+        <label htmlFor='ciudad'>
+          Ciudad:
         </label>
-        <input type="text" value={ciudad} name="ciudad" onChange={(e) => setCiudad(e.target.value)} placeholder="Ciudad" />
+        <input
+          type="text" value={user.ciudad}
+          name="ciudad" onChange={onChangeUser}
+          placeholder="Ciudad"
+        />
       </div>
       <div>
-        <label>
-          •Cupo Otorgado
+        <label htmlFor='cupo'>
+          Cupo Otorgado:
         </label>
-        <input type="text" value={cupo} name="cupo" onChange={(e) => setCupo(e.target.value)} placeholder="Cupo Otorgado" />
+        <input
+          type="text" value={user.cupo}
+          name="cupo" onChange={onChangeUser}
+          placeholder="Cupo Otorgado"
+        />
       </div>
       <div>
-        <label>
-          •Activo
+        <label htmlFor='activo'>
+          Activo:
         </label>
-        <input type="checkbox" value={activo} name="activo" onChange={(e) => setActivo(e.target.value)} placeholder="Activo" />
+        <input
+          type="checkbox" defaultChecked={check}
+          name="activo" onChange={() => setCheck(!check)}
+        />
       </div>
       <div>
-        <button type="submit">Enviar</button>
+        <button>Agregar</button>
       </div>
     </form>
   );

@@ -3,14 +3,19 @@ import { useStorage } from './useStorage';
 
 function useProvider(){
 
-  const [ list, saveData ] = useStorage('clientes', []);
+  const { list, saveData, error, setError} = useStorage('clientes', []);
 
   const count = list.length;
 
   const addClient = (client) => {
-    let newList = [ ...list ];
-    newList.push(client);
-    saveData(newList);
+    const valid = list.find(item => item.identificacion === client.identificacion);
+    if(valid){
+      setError('El cliente ya existe');
+    } else {
+      let newList = [ ...list ];
+      newList.push(client);
+      saveData(newList);
+    };
   };
 
   const removeClient = (identificacion) => {
@@ -20,7 +25,7 @@ function useProvider(){
     saveData(newList);
   };
 
-  return {list, count, addClient, removeClient}
+  return { list, count, addClient, removeClient, error };
 };
 
 
