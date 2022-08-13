@@ -1,5 +1,4 @@
 import './App.css';
-import { useProvider } from './useProvider';
 import { Header } from '../components/Header';
 import { Head } from '../components/Head';
 import { Main } from '../components/Main';
